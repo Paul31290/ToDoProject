@@ -1,10 +1,15 @@
 package com.example.demo.entities;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="user")
+@Table(name="user", schema = "public")
 public class User{
 
 	@Id
@@ -20,6 +25,10 @@ public class User{
 	
 	@Column(name = "role", nullable = false)
     private String role;
+	
+	@JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private final List<ToDo> todos = new ArrayList<>();
     
 	public Long getUserId() {
 		return userId;
@@ -42,5 +51,19 @@ public class User{
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
+	public List<ToDo> getTodos() {
+        return todos;
+    }
+
+    public void addToDo(ToDo todo) {
+        todos.add(todo);
+        todo.setUser(this);
+    }
+
+    public void removeToDo(ToDo todo) {
+        todos.remove(todo);
+        todo.setUser(null);
+    }
     
 }

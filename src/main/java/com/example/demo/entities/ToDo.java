@@ -9,7 +9,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
-@Table(name="todo")
+@Table(name="todo", schema = "public")
 @Entity
 public class ToDo {
 	
@@ -32,7 +32,10 @@ public class ToDo {
 	@Column(name = "is_done", nullable = false)
 	private boolean isDone;
 
-	public ToDo(String title, String description, boolean isDone) {
+	
+	public ToDo(Long todoId, User user, String title, String description, boolean isDone) {
+		this.todoId = todoId;
+		this.user = user;
 		this.title = title;
 		this.description = description;
 		this.isDone = isDone;
@@ -60,6 +63,14 @@ public class ToDo {
 
 	public void setDone(boolean isDone) {
 		this.isDone = isDone;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	
