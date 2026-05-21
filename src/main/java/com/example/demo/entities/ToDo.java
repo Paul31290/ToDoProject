@@ -32,15 +32,6 @@ public class ToDo {
 	@Column(name = "is_done", nullable = false)
 	private boolean isDone;
 
-	
-	public ToDo(Long todoId, User user, String title, String description, boolean isDone) {
-		this.todoId = todoId;
-		this.user = user;
-		this.title = title;
-		this.description = description;
-		this.isDone = isDone;
-	}
-
 	public String getTitle() {
 		return title;
 	}

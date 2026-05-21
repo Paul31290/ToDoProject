@@ -5,11 +5,9 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.entities.User;
 import com.example.demo.repositories.UserRepository;
-
-import lombok.AllArgsConstructor;
+import com.example.demo.requests.LoginRequest;
 
 @Service
-@AllArgsConstructor
 public class UserService{
 	
 	@Autowired
@@ -19,15 +17,22 @@ public class UserService{
 		this.userRepository = userRepository;
 	}
 
-	public User register(User user) {
-		if(userRepository.findByUsername(user.getUsername()) == null) {
-			return userRepository.save(user);
-		} else {
-			throw new RuntimeException("The user with the name "+ user.getUsername() +" already exists. Please input another name");
+	public User register(String username, String password) {
+		User userToRegister = new User();
+		userToRegister.setUsername(username);
+		if(userRepository.findByUsername(userToRegister.getUsername()) != null) {
+			throw new RuntimeException("The user with the name "+ userToRegister.getUsername() +" already exists. Please input another name");
 		}
+		userToRegister.setPassword(password);
+		userToRegister.setRole("user");
+		return userRepository.save(userToRegister);
 	}
 	
-	public User login(String username, String password) {
+	public User login(LoginRequest loginRequest) {
+		
+		String username = loginRequest.getUsername();
+		String password = loginRequest.getPassword();
+		
 		User user = userRepository.findByUsername(username);
 		if (user != null) {
 			if(user.getPassword().equals(password)) {

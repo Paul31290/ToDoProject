@@ -28,11 +28,15 @@ public class ToDoService {
 		}
 	}
 	
-	public ToDo createTodoItem(long userId, ToDo toDoItem) {
+	public ToDo createTodoItem(long userId, String title, String description) {
         User user = userRepository.findById(userId).orElse(null);
         if (user != null) {
-            toDoItem.setUser(user);
-            return toDoRepository.save(toDoItem);
+            ToDo createdToDo = new ToDo();
+            createdToDo.setUser(user);
+            createdToDo.setTitle(title);
+            createdToDo.setDescription(description);
+            createdToDo.setDone(false);
+            return toDoRepository.save(createdToDo);
         }
         else {
             throw new RuntimeException("User not found");

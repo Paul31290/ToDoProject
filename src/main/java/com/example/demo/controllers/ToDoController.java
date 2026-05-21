@@ -18,7 +18,7 @@ import com.example.demo.services.ToDoService;
 
 @RestController
 @RequestMapping("/api/todos")
-@CrossOrigin(origins = "https://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ToDoController {
 
 	@Autowired
@@ -34,8 +34,8 @@ public class ToDoController {
 	}
 	
 	@PostMapping("/user/{user_id}")
-	public ToDo createToDo(@PathVariable Long user_id, @RequestBody ToDo toDo) {
-		return toDoService.createTodoItem(user_id, toDo);
+	public ToDo createToDo(@PathVariable Long user_id, String title, String description) {
+		return toDoService.createTodoItem(user_id, title, description);
 	}
 	
 	@PutMapping("/{todo_id}")
