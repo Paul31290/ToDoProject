@@ -16,7 +16,11 @@ public class UserService{
 	public UserService(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
-
+	
+	/*
+	 * Register a new user to the application, the user name and the password are inputed by the user
+	 * but the Id and the role are set by default (role = user) 
+	 */
 	public User register(String username, String password) {
 		User userToRegister = new User();
 		userToRegister.setUsername(username);
@@ -27,7 +31,11 @@ public class UserService{
 		userToRegister.setRole("user");
 		return userRepository.save(userToRegister);
 	}
-	
+	/*
+	 * Login an existing User in the application. 
+	 * Only the password and the user name are necessary,
+	 * so we use the loginRequest with only those parameters.
+	 */
 	public User login(LoginRequest loginRequest) {
 		
 		String username = loginRequest.getUsername();
@@ -43,9 +51,5 @@ public class UserService{
 		} else {
 			throw new RuntimeException("Invalid username, try again.");
 		}
-	}
-	
-	public User getUser(String username) {
-		return userRepository.findByUsername(username);
 	}
 }

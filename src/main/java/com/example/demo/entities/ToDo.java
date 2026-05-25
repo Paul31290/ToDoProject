@@ -31,6 +31,11 @@ public class ToDo {
 	
 	@Column(name = "is_done", nullable = false)
 	private boolean isDone;
+	
+	
+	public Long getTodoId() {
+		return todoId;
+	}
 
 	public String getTitle() {
 		return title;

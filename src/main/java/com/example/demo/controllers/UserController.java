@@ -33,9 +33,4 @@ public class UserController {
 	public User login(LoginRequest loginRequest) {
 		return userService.login(loginRequest);
 	}
-	
-	@GetMapping("/user")
-	public User getUser(String username) {
-		return userService.getUser(username);
-	}
 }

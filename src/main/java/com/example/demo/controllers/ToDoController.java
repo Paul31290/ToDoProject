@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entities.ToDo;
+import com.example.demo.requests.ToDoUpdateRequest;
 import com.example.demo.services.ToDoService;
 
 @RestController
@@ -39,8 +40,8 @@ public class ToDoController {
 	}
 	
 	@PutMapping("/{todo_id}")
-	public ToDo updateToDo(@PathVariable Long todo_id, @RequestBody ToDo toDo) {
-		return toDoService.updateTodoItem(todo_id, toDo);
+	public ToDo updateToDo(@PathVariable Long todo_id, @RequestBody ToDoUpdateRequest toDoUpdateRequest) {
+		return toDoService.updateTodoItem(todo_id, toDoUpdateRequest);
 	}
 	
 	@DeleteMapping("/{todo_id}")

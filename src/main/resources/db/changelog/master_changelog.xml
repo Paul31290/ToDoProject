@@ -51,8 +51,8 @@
     
     <changeSet id="2" author="postgres">
     
-    <addAutoIncrement incrementBy="1" tableName="user" columnName="user_id" columnDataType="bigint" />
-    
-    <addAutoIncrement incrementBy="1" tableName="todo" columnName="todo_id" columnDataType="bigint" />
+	    <addAutoIncrement incrementBy="1" tableName="user" columnName="user_id" columnDataType="bigint" />
+	    
+	    <addAutoIncrement incrementBy="1" tableName="todo" columnName="todo_id" columnDataType="bigint" />
     </changeSet>
 </databaseChangeLog>
