@@ -27,7 +27,7 @@ public class User{
     private String role;
 	
 	@JsonIgnore
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private final List<ToDo> todos = new ArrayList<>();
     
 	public Long getUserId() {

@@ -1,8 +1,11 @@
 package com.example.demo.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.dto.UserDto;
 import com.example.demo.entities.User;
 import com.example.demo.repositories.UserRepository;
 import com.example.demo.requests.LoginRequest;
@@ -51,5 +54,22 @@ public class UserService{
 		} else {
 			throw new RuntimeException("Invalid username, try again.");
 		}
+	}
+	
+	public UserDto getUser(String username) {
+		User user = userRepository.findByUsername(username);
+		return new UserDto(user.getUsername(), user.getPassword(), user.getRole());
+	}
+	
+	public User getUserWithTodos(String username) {
+		User user = userRepository.findByUsername(username);
+		return user;
+	}
+	
+	public List<UserDto> getAllUsers(){
+		List<UserDto> users = userRepository.findAll().stream()
+				.map(user -> new UserDto(user.getUsername(), user.getPassword(), user.getRole()))
+				.toList();
+		return users;
 	}
 }
